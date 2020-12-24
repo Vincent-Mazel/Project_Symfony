@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+		<meta name="viewport" content="width=device.width, initial-scale=1">
+
+		<title>Index</title>
+		
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('index') }}
+		{% endblock %}
+    </head>
+    <body>
+		{% block body %}
+			<div class="welcome_div">
+				<h1 class="welcome_title">Bienvenue sur True Fake news</h1>
+
+				<p class="welcome_text">
+					Vous trouverez sur ce site un concentré de news aussi intéressantes les unes que les autres, et dont la
+					véracité n'est évidemment plus à prouver. 
+					
+					<br>
+
+					Veuillez cependant nous pardonner pour le visuel, tout le budget est parti dans l'écriture des articles.
+				</p>
+			</div>
+
+			<div class="account_div">
+				<p class="text_connexion_info">
+					Connectez-vous afin de pouvoir créer des articles et en supprimer si vous disposez d'un compte admin !
+				</p>
+
+				<button type="button" class="btn btn-success btn-lg button-marg-right">Se connecter</button>
+				<button type="button" class="btn btn-info btn-lg">Créer compte</button>
+			</div>
+
+			<div id="articles_carousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
+				<a href="#articles_carousel" class="left_arrow_carousel" role="button" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</a>
+
+				<a href="#articles_carousel" class="right_arrow_carousel" role="button" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</a>
+
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<div class="article">
+							<h2 class="article_title">COVID-2020, COVID-2021 et COVID-2022 déjà prévus ?</h2>
+
+							<p class="article_text">
+								Après avoir mis en place le COVID-19, nous avons eu l'occasion de discuter avec les scénaristes de l'année 2020 
+								qui auraient déjà anticipé avec l'arrivée de nouveaux COVID pour les années à venir.
+							</p>
+
+							<div class="btns-article-div">
+								<button type="button" class="btn btn-warning button-marg-right button-marg-left btn-article">Modifier article</button>
+								<button type="button" class="btn btn-danger btn-article">Supprimer article</button>
+							</div>
+						</div>
+
+						<div class="article">
+					
+						</div>
+
+						<div class="article">
+					
+						</div>
+
+						<div class="article">
+					
+						</div>
+
+						<div class="article">
+					
+						</div>
+					</div>
+
+					<div class="carousel-item">
+						<div class="article">
+					
+						</div>
+
+						<div class="article">
+					
+						</div>
+
+						<div class="article">
+					
+						</div>
+
+						<div class="article">
+				
+						</div>
+
+						<div class="article">
+					
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('index') }}
+		{% endblock %}
+    </body>
+</html>
