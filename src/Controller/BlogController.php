@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Repository\ArticleRepository;
+//use App\Repository\ArticleRepository;
 
 class BlogController extends AbstractController {
     /**
      * @Route("/", name="homepage")
      */
-    public function index(ArticleRepository $articleRepository): Response {
+    public function index(/*ArticleRepository $articleRepository*/): Response {
 
         //$firstArticles = $articleRepository->findFirstArticles(10);
 
@@ -25,7 +25,7 @@ class BlogController extends AbstractController {
     /**
      * @Route("/article/{id}", name="post")
      */
-    public function post($id, ArticleRepository $articleRepository): Response {
+    public function post($id/*ArticleRepository $articleRepository*/): Response {
 
         //$article = $articleRepository->find($id);
 

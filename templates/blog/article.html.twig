@@ -1,12 +1,98 @@
-  
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+		<meta name="viewport" content="width=device.width, initial-scale=1">
 
-{% block title %}Hello BlogController!{% endblock %}
+		<title>Nom de l'article</title>
+		
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('article') }}
+		{% endblock %}
+    </head>
 
-{% block body %}
+    <body>
+		{% block body %}
+			<a href="/">
+				<img src="{{ asset('build/home.png') }}" class="home_icon">
+			</a>
 
+			<div class="author-date-div">
+				<p class="author-text">
+					<b>Auteur :</b> Vincent Mazel
+				</p>
 
-<div>
-	<p>L'ID en question : {{ id }}</p>
-</div>
-{% endblock %}
+				<p class="date-text">
+					<b>Date de publication :</b> 22 / 12 / 2020
+				</p>
+			</div>
+
+			<div class="article_div">
+				<h1 class="article_title">COVID-2020, COVID-2021 et COVID-2022 déjà prévus ?</h2>
+
+				<p class="article_intro">Après avoir mis en place le COVID-19, nous avons eu l'occasion de discuter avec les scénaristes de l'année 2020 qui auraient déjà anticipé avec l'arrivée de nouveaux COVID pour les années à venir.
+				</p>
+
+				<p class="article_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</p>
+
+				{% if false %}
+					<div class="btns-article-div">
+						<button type="button" class="btn btn-warning button-marg btn-article btn-modify-article">Modifier article</button>
+						<button type="button" class="btn btn-danger btn-article btn-delete-article">Supprimer article</button>
+					</div>
+				{% endif %}
+			</div>
+
+			<div class="modal fade" id="delete-article-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog w-75" role="document">
+					<div class="modal-content">
+						<div class="modal-body">
+							<h2 class="delete-modal-text">Suppression de l'article</h2>
+
+							<p class="delete-modal-text">
+								Es- tu sûr de vouloir continuer sur ce chemin et faire disparaître à jamais cet article de la surface de la Terre ?
+								Si tel est ton souhait, poursuis tes convictions jusqu'au bout sans regarder en arrière ...
+							</p>
+
+							<button type="button" class="btn btn-danger button-success btn-delete-modal btn-marg-right btn-cancel-delete">Annuler</button>
+							<button type="button" class="btn btn-success btn-delete-modal btn-eliminate">Valider</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="modify-article-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog w-75" role="document">
+					<div class="modal-content">
+						<div class="modal-body">
+							<h2 class="delete-modal-text">Modification de l'article</h2>
+
+							<div class="form-group">
+								<label for="title-textarea" class="form-label">Titre</label>
+								<textarea class="form-control" aria-label="With textarea" id="title-textarea"></textarea>
+							</div>
+
+							<div class="form-group">
+								<label for="intro-textarea" class="form-label">Intro</label>
+								<textarea class="form-control" aria-label="With textarea" id="intro-textarea"></textarea>
+							</div>
+
+							<div class="form-group">
+								<label for="texte-textarea" class="form-label">Texte</label>
+								<textarea class="form-control" aria-label="With textarea" id="texte-textarea"></textarea>
+							</div>
+
+							<button type="button" class="btn btn-danger btn-delete-modal btn-marg-right btn-annulate-modification">Annuler</button>
+							<button type="button" class="btn btn-success button-success btn-delete-modal btn-validate-modification">Valider</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('index') }}
+		{% endblock %}
+    </body>
+</html>

@@ -30,8 +30,14 @@
 					Connectez-vous afin de pouvoir créer des articles et en supprimer si vous disposez d'un compte admin !
 				</p>
 
-				<button type="button" class="btn btn-success btn-lg button-marg-right">Se connecter</button>
-				<button type="button" class="btn btn-info btn-lg">Créer compte</button>
+				{% if false %}
+					<button type="button" class="btn btn-success btn-lg button-marg-right connect-button">Se connecter</button>
+					<button type="button" class="btn btn-info btn-lg create-account-button" data-toggle="modal" data-target="creation_compte_modal">Créer compte</button>
+				{% endif %}
+				
+				{% if true %}
+					<button type="button" class="btn btn-info btn-lg create-account-button" data-toggle="modal" data-target="creation_compte_modal">Créer un nouvel article</button>
+				{% endif %}
 			</div>
 
 			<div id="articles_carousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
@@ -47,24 +53,23 @@
 
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<div class="article">
-							<h2 class="article_title">COVID-2020, COVID-2021 et COVID-2022 déjà prévus ?</h2>
+						<a href="/article/1">
+							<div class="article">
+								<h2 class="article_title">COVID-2020, COVID-2021 et COVID-2022 déjà prévus ?</h2>
 
-							<p class="article_text">
-								Après avoir mis en place le COVID-19, nous avons eu l'occasion de discuter avec les scénaristes de l'année 2020 
-								qui auraient déjà anticipé avec l'arrivée de nouveaux COVID pour les années à venir.
-							</p>
-
-							<div class="btns-article-div">
-								<button type="button" class="btn btn-warning button-marg-right button-marg-left btn-article">Modifier article</button>
-								<button type="button" class="btn btn-danger btn-article">Supprimer article</button>
+								<p class="article_text">
+									Après avoir mis en place le COVID-19, nous avons eu l'occasion de discuter avec les scénaristes de l'année 2020 
+									qui auraient déjà anticipé avec l'arrivée de nouveaux COVID pour les années à venir.
+								</p>
 							</div>
-						</div>
-
-						<div class="article">
+						</a>	
+				
+						<a href="/article/1">
+							<div class="article">
 					
-						</div>
-
+							</div>
+						</a>		
+						
 						<div class="article">
 					
 						</div>
@@ -97,6 +102,63 @@
 
 						<div class="article">
 					
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="creation_compte_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog w-50" role="document">
+					<div class="modal-content">
+						<div class="modal-body">
+							<h2 class="title-modal">
+								Création du compte
+							</h2>
+
+							<form>
+								<div class="form-group">
+									<label for="pseudo-input" class="form-label">Pseudo</label>
+									<input type="text" class="form-control form-control-lg" id="pseudo-input" placeholder="Renseigne ton pseudo">
+								</div>
+
+								<div class="form-group">
+									<label for="password-input" class="form-label">Password</label>
+									<input type="password" class="form-control form-control-lg" id="password-input" placeholder="Renseigne ton password">
+								</div>
+
+								<div class="form-group">
+									<label for="password-confirmate-input" class="form-label">Confirmer le password</label>
+									<input type="password" class="form-control form-control-lg" id="password-confirmate-input" placeholder="Confirme le mdp bro">
+								</div>
+
+								<button type="submit" class="btn btn-primary">Valider</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="connect_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog w-50" role="document">
+					<div class="modal-content">
+						<div class="modal-body">
+							<h2 class="title-modal">
+								Connexion
+							</h2>
+
+							<form>
+								<div class="form-group">
+									<label for="pseudo-input" class="form-label">Pseudo</label>
+									<input type="text" class="form-control form-control-lg" id="pseudo-input" placeholder="Renseigne ton pseudo">
+								</div>
+
+								<div class="form-group">
+									<label for="password-input" class="form-label">Password</label>
+									<input type="password" class="form-control form-control-lg" id="password-input" placeholder="Renseigne ton password">
+								</div>
+
+								<button type="submit" class="btn btn-primary">Valider</button>
+							</form>
 						</div>
 					</div>
 				</div>

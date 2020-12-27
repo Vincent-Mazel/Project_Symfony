@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
+use App\Repository\ArticleEntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\Entity(repositoryClass=ArticleEntityRepository::class)
  */
-class Article
+class ArticleEntity
 {
     /**
      * @ORM\Id
@@ -18,7 +18,7 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=255)
      */
     private $title;
 
@@ -29,6 +29,11 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     */
+    private $intro;
+
+    /**
+     * @ORM\Column(type="string", length=300)
      */
     private $content;
 
@@ -62,6 +67,18 @@ class Article
     public function setUrlAlias(string $url_alias): self
     {
         $this->url_alias = $url_alias;
+
+        return $this;
+    }
+
+    public function getIntro(): ?string
+    {
+        return $this->intro;
+    }
+
+    public function setIntro(string $intro): self
+    {
+        $this->intro = $intro;
 
         return $this;
     }
