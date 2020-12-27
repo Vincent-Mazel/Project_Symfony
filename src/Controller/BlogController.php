@@ -14,8 +14,8 @@ class BlogController extends AbstractController {
      */
     public function index(ArticleEntityRepository $articleEntityRepository): Response {
 
-        //$firstArticles = $articleEntityRepository->findAll();
-
+        $firstArticles = $articleEntityRepository->findAll();
+        
         return $this->render('blog/index.html.twig', [
             //'articles' => $firstArticles,
             'message' => 'Page d\'accueil'
