@@ -6,15 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-//use App\Repository\ArticleRepository;
+use App\Repository\ArticleEntityRepository;
 
 class BlogController extends AbstractController {
     /**
      * @Route("/", name="homepage")
      */
-    public function index(/*ArticleRepository $articleRepository*/): Response {
+    public function index(ArticleEntityRepository $articleEntityRepository): Response {
 
-        //$firstArticles = $articleRepository->findFirstArticles(10);
+        //$firstArticles = $articleEntityRepository->findAll();
 
         return $this->render('blog/index.html.twig', [
             //'articles' => $firstArticles,
@@ -23,7 +23,7 @@ class BlogController extends AbstractController {
     }
 
     /**
-     * @Route("/article/{id}", name="post")
+     * @Route("/post/{id}", name="post")
      */
     public function post($id/*ArticleRepository $articleRepository*/): Response {
 
