@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+		<meta name="viewport" content="width=device.width, initial-scale=1">
+
+		<title>Articles API</title>
+		
+        <!--
+            Même problème ici nous ne comprenons pas pourquoi le scss dédié à ce template ne se build pas
+            lors de l'exécution de npm build run
+        -->
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('index') }}
+		{% endblock %}
+    </head>
+
+    <body>
+		{% block body %}
+            <a href="/">
+				<img src="{{ asset('build/home.png') }}" class="home_icon">
+			</a>
+
+			{% if app.user %}
+				<button type="button" class="btn btn-danger btn-lg deco-button">Déconnexion</button>
+			{% endif %}
+			
+			<div class="welcome_div">
+				<h1 class="welcome_title">Appel API</h1>
+
+				<p class="welcome_text">
+					Nous appelons sur cette page l'API avec le lien ci-dessous :
+					
+					<br>
+
+					'http://medouaz-blog.herokuapp.com/api/posts'
+				</p>
+			</div>
+
+            {% for article in articles %}
+				<div class="article_API">
+					<h2 class="article_title">{{ article.title }}</h2>
+
+					<p class="article_text">{{ article.content }}</p>
+				</div>
+			{% endfor %}
+
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('index') }}
+		{% endblock %}
+    </body>
+</html>

@@ -13,17 +13,16 @@ import { Tooltip, Toast, Popover } from 'bootstrap';
 // start the Stimulus application
 import './bootstrap';
 
-
-$(".article").click(function() {
-    window.location.href = "http://127.0.0.1:8000/article/1";
-})
-
-$(".create-account-button").click(function() {
-    $('#creation_compte_modal').modal('show');
-})
-
 $(".connect-button").click(function() {
-    $('#connect_modal').modal('show');
+    document.location.href = "/login";
+})
+
+$(".deco-button").click(function() {
+    document.location.href = "/logout";
+})
+
+$(".api-call-button").click(function() {
+    document.location.href = "/api/get_articles";
 })
 
 $(".btn-delete-article").click(function() {

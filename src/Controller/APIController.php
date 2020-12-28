@@ -5,16 +5,48 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class APIController extends AbstractController
 {
     /**
-     * @Route("/a/p/i", name="a_p_i")
+     * @Route("/api/get_articles", name="api_post")
      */
-    public function index(): Response
+    public function index(HttpClientInterface $httpClient): Response
     {
-        return $this->render('api/index.html.twig', [
-            'controller_name' => 'APIController',
+        $response = $httpClient->request(
+            'GET',
+            'http://medouaz-blog.herokuapp.com/api/posts'
+        );
+
+        $articles = $response->getContent();
+        $articles = $response->toArray();
+
+        return $this->render('blog/api_Articles.html.twig', [
+            'articles' => $articles
         ]);
+    }
+
+    /**
+     * @Route("/api/posts", name="api_posts",  methods={"GET"})
+     */
+    public function sendPosts(ArticleEntityRepository $articleEntityRepository): JsonResponse
+    {
+        $articles = $articleEntityRepository->findBy(array(), array('id' => 'DESC'), 5);
+
+        $jsonArticles = [];
+
+        foreach ($articles as $article) {
+            $jsonArticles[] = [
+                'id' => $article->getId(),
+                'title' => $article->getTitle(),
+                'urlAlias' => $article->getUrlAlias(),
+                'intro' => $article->getIntro(),
+                'content' => $article->getContent(),
+                'published' => $article->getPublished(),
+            ];
+        }
+
+        return new JsonResponse($jsonArticles, Response::HTTP_OK);
     }
 }
