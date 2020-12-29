@@ -23,7 +23,7 @@
 
 			<div class="date-div">
 				<p class="date-text">
-					<b>Date de publication :</b> {{ article.published | date("m/d/Y") }}
+					<b>Date de publication :</b> {{ article.published | date("d/m/Y") }}
 				</p>
 			</div>
 
@@ -36,56 +36,19 @@
 
 				{% if is_granted("ROLE_ADMIN") %}
 					<div class="btns-article-div">
-						<button type="button" class="btn btn-warning button-marg btn-article btn-modify-article">Modifier article</button>
-						<button type="button" class="btn btn-danger btn-article btn-delete-article">Supprimer article</button>
+						<a href="{{ path('editArticle', {'id': article.id}) }}">
+							<button type="button" class="btn btn-warning button-marg btn-article btn-modify-article">Modifier article</button>
+						</a>
+						
+
+						<form method="post" action="{{ path('deleteArticle', {'id': article.id}) }}" onsubmit="return confirm('Es-tu sûr de vouloir continuer sur ce chemin et faire disparaître à jamais cet article de la surface de la Terre ?');">
+							<input type="hidden" name="_method" value="DELETE">
+							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
+
+							<button type="submit" class="btn btn-danger btn-article">Supprimer article</button>
+						</form>
 					</div>
 				{% endif %}
-			</div>
-
-			<div class="modal fade" id="delete-article-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog w-75" role="document">
-					<div class="modal-content">
-						<div class="modal-body">
-							<h2 class="delete-modal-text">Suppression de l'article</h2>
-
-							<p class="delete-modal-text">
-								Es- tu sûr de vouloir continuer sur ce chemin et faire disparaître à jamais cet article de la surface de la Terre ?
-								Si tel est ton souhait, poursuis tes convictions jusqu'au bout sans regarder en arrière ...
-							</p>
-
-							<button type="button" class="btn btn-danger button-success btn-delete-modal btn-marg-right btn-cancel-delete">Annuler</button>
-							<button type="button" class="btn btn-success btn-delete-modal btn-eliminate">Valider</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="modal fade" id="modify-article-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog w-75" role="document">
-					<div class="modal-content">
-						<div class="modal-body">
-							<h2 class="delete-modal-text">Modification de l'article</h2>
-
-							<div class="form-group">
-								<label for="title-textarea" class="form-label">Titre</label>
-								<textarea class="form-control" aria-label="With textarea" id="title-textarea"></textarea>
-							</div>
-
-							<div class="form-group">
-								<label for="intro-textarea" class="form-label">Intro</label>
-								<textarea class="form-control" aria-label="With textarea" id="intro-textarea"></textarea>
-							</div>
-
-							<div class="form-group">
-								<label for="texte-textarea" class="form-label">Texte</label>
-								<textarea class="form-control" aria-label="With textarea" id="texte-textarea"></textarea>
-							</div>
-
-							<button type="button" class="btn btn-danger btn-delete-modal btn-marg-right btn-annulate-modification">Annuler</button>
-							<button type="button" class="btn btn-success button-success btn-delete-modal btn-validate-modification">Valider</button>
-						</div>
-					</div>
-				</div>
 			</div>
 		{% endblock %}
 

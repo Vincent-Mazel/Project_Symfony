@@ -25,16 +25,12 @@ $(".api-call-button").click(function() {
     document.location.href = "/api/get_articles";
 })
 
-$(".btn-delete-article").click(function() {
-    $('#delete-article-modal').modal('show');
+$(".create-article-button").click(function() {
+    document.location.href = "/newArticle";
 })
 
-$(".btn-modify-article").click(function() {
-    $('#title-textarea').val($('.article_title').html());
-    $('#intro-textarea').val($('.article_intro').html());
-    $('#texte-textarea').val($('.article_text').html());
-
-    $('#modify-article-modal').modal('show');
+$(".btn-delete-article").click(function() {
+    $('#delete-article-modal').modal('show');
 })
 
 $(".btn-cancel-delete").click(function() {

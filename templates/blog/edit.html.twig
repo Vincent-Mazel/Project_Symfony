@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+		<meta name="viewport" content="width=device.width, initial-scale=1">
+
+		<title>Modification article</title>
+		
+        <!-- 
+            Il aurait dû y avoir ici l'appel au css correspondant à la page de login et non index, mais pour des raisons
+            qui nous sont obscures, la compilation de login.scss n'a jamais fonctionnée, et nous n'avions pas le temps d'essayer
+            de la faire fonctionner.
+         -->
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('index') }} 
+		{% endblock %}
+    </head>
+
+    {% block body %}
+
+        <a href="/">
+			<img src="{{ asset('build/home.png') }}" class="home_icon">
+		</a>
+
+		{% if app.user %}
+			<button type="button" class="btn btn-danger btn-lg deco-button">Déconnexion</button>
+		{% endif %}
+
+        <h1 class="h3 mb-3 font-weight-normal title-modal">Modification d'un article</h1>
+
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            {{ form_row(form.title, {'attr': {'class': 'form-control form-control-lg'}, 'label_attr': {'class': 'form-label'}}) }}
+            {{ form_row(form.intro, {'attr': {'class': 'form-control form-control-lg'}, 'label_attr': {'class': 'form-label'}}) }}
+            {{ form_row(form.content, {'attr': {'class': 'form-control form-control-lg'}, 'label_attr': {'class': 'form-label'}}) }}
+            {{ form_row(form.url_alias, {'attr': {'class': 'form-control form-control-lg'}, 'label_attr': {'class': 'form-label'}}) }}
+            {{ form_row(form.published, {'attr': {'class': 'form-control form-control-lg'}, 'label_attr': {'class': 'form-label'}}) }}
+
+            {{ form_row(form._token) }}
+
+            <button class="btn btn-lg btn-primary" type="submit">Valider</button>
+
+            {% block javascripts %}
+                {{ encore_entry_script_tags('index') }}
+            {% endblock %}
+    {% endblock %}
+</html>
+
+
+

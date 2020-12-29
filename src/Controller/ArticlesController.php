@@ -5,92 +5,82 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ArticleEntity;
+use App\Form\ArticleEntityType;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class ArticlesController extends AbstractController
 {
-    /**
-     * @Route("/articles", name="articles")
-     */
-    public function index(): Response
-    {
-        return $this->render('articles/index.html.twig', [
-            'controller_name' => 'ArticlesController',
-        ]);
-    }
+    /*
+        Dans un monde idéal, nous aurions dû uniquement demander à l'utilisateur de renseigner le titre et le contenu de l'article, et l'url alias et 
+        la date devraient être renseignés automatiquement dans le code. Cependant, nous n'avons honnêtement pas le temps de réaliser ses fonctionnalités
+        car nous devrons rendre d'autres projets et réviser les partiels, mais nous sommes conscients qu'il aurait été possible d'avoir un meilleur résultat.
+    */
 
 
      /**
      * @Route("/newArticle", name="newArticle")
      */
-    public function createArticle(): Response
+    public function createArticle(Request $request): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-
         $article = new ArticleEntity();
-        $article->setTitle('COVID-2020, COVID-2021 et COVID-2022 déjà prévus ?');
-        $article->setUrlAlias('covid');
-        $article->setIntro("Après avoir mis en place le COVID-19, nous avons eu l'occasion de discuter avec les scénaristes de l'année 2020 qui auraient déjà anticipé avec l'arrivée de nouveaux COVID pour les années à venir.");
-        $article->setContent('qsdpfijqsijfqdsjflqdsjfqdskl');
-        $article->setPublished(\DateTime::createFromFormat("d/m/Y","22/11/2020"));
-        
 
-        // tell Doctrine you want to (eventually) save the ArticleEntity (no queries yet)
-        $entityManager->persist($article);
+        $form = $this->createForm(ArticleEntityType::class, $article);
 
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
+        $form->handleRequest($request);
 
-        return new Response('Saved new product with id '.$article->getId());
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->persist($article);
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('blog/new.html.twig', [
+            'article' => $article,
+            'form' => $form->createView(),
+        ]);
     }
 
 
     /**
-     * @Route("/editArticle", name="editArticle")
+     * @Route("/{id}", name="editArticle")
      */
-    public function editArticle(): Response
+    public function editArticle(Request $request, ArticleEntity $articleEntity): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        $form = $this->createForm(ArticleEntityType::class, $articleEntity);
+        $form->handleRequest($request);
 
-        $article = new ArticleEntity();
-        $article->setTitle('COVID-2020, COVID-2021 et COVID-2022 déjà prévus ?');
-        $article->setUrlAlias('covid');
-        $article->setIntro("Après avoir mis en place le COVID-19, nous avons eu l'occasion de discuter avec les scénaristes de l'année 2020 qui auraient déjà anticipé avec l'arrivée de nouveaux COVID pour les années à venir.");
-        $article->setContent('qsdpfijqsijfqdsjflqdsjfqdskl');
-        $article->setPublished(\DateTime::createFromFormat("d/m/Y","22/11/2020"));
-        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
 
-        // tell Doctrine you want to (eventually) save the ArticleEntity (no queries yet)
-        $entityManager->persist($article);
+            return $this->redirectToRoute('homepage');
+        }
 
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
-
-        return new Response('Saved new product with id '.$article->getId());
+        return $this->render('blog/edit.html.twig', [
+            'article' => $articleEntity,
+            'form' => $form->createView(),
+        ]);
     }
 
 
     /**
-     * @Route("/deleteArticle", name="deleteArticle")
+     * @Route("/{id}", name="deleteArticle", methods={"DELETE"})
      */
-    public function deleteArticle(): Response
+    public function deleteArticle(Request $request, ArticleEntity $articleEntity): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        if ($this->isCsrfTokenValid('delete'.$articleEntity->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
 
-        $article = new ArticleEntity();
-        $article->setTitle('COVID-2020, COVID-2021 et COVID-2022 déjà prévus ?');
-        $article->setUrlAlias('covid');
-        $article->setIntro("Après avoir mis en place le COVID-19, nous avons eu l'occasion de discuter avec les scénaristes de l'année 2020 qui auraient déjà anticipé avec l'arrivée de nouveaux COVID pour les années à venir.");
-        $article->setContent('qsdpfijqsijfqdsjflqdsjfqdskl');
-        $article->setPublished(\DateTime::createFromFormat("d/m/Y","22/11/2020"));
-        
+            $entityManager->remove($articleEntity);
 
-        // tell Doctrine you want to (eventually) save the ArticleEntity (no queries yet)
-        $entityManager->persist($article);
+            $entityManager->flush();
+        }
 
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
-
-        return new Response('Saved new product with id '.$article->getId());
+        return $this->redirectToRoute('homepage');
     }
 }
