@@ -26,7 +26,7 @@ $(".api-call-button").click(function() {
 })
 
 $(".create-article-button").click(function() {
-    document.location.href = "/newArticle";
+    document.location.href = "/article/new";
 })
 
 $(".btn-delete-article").click(function() {

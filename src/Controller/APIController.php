@@ -10,16 +10,14 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class APIController extends AbstractController
 {
     /**
-     * @Route("/api/get_articles", name="api_post")
+     * @Route("/api/get_articles", name="api_call")
      */
     public function index(HttpClientInterface $httpClient): Response
     {
-        $response = $httpClient->request(
-            'GET',
-            'http://medouaz-blog.herokuapp.com/api/posts'
-        );
+        $response = $httpClient->request('GET', 'http://medouaz-blog.herokuapp.com/api/posts');
 
         $articles = $response->getContent();
+
         $articles = $response->toArray();
 
         return $this->render('blog/api_Articles.html.twig', [
@@ -28,7 +26,7 @@ class APIController extends AbstractController
     }
 
     /**
-     * @Route("/api/posts", name="api_posts",  methods={"GET"})
+     * @Route("/api/posts", name="api_send",  methods={"GET"})
      */
     public function sendPosts(ArticleEntityRepository $articleEntityRepository): JsonResponse
     {

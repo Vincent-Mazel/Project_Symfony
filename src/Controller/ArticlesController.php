@@ -20,7 +20,7 @@ class ArticlesController extends AbstractController
 
 
      /**
-     * @Route("/newArticle", name="newArticle")
+     * @Route("article/new", name="newArticle")
      */
     public function createArticle(Request $request): Response
     {
@@ -48,7 +48,7 @@ class ArticlesController extends AbstractController
 
 
     /**
-     * @Route("/{id}/editArticle", name="editArticle")
+     * @Route("article/{id}/edit", name="editArticle")
      */
     public function editArticle(Request $request, ArticleEntity $articleEntity): Response
     {
@@ -69,7 +69,7 @@ class ArticlesController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="deleteArticle", methods={"DELETE"})
+     * @Route("article/{id}", name="deleteArticle", methods={"DELETE"})
      */
     public function deleteArticle(Request $request, ArticleEntity $articleEntity): Response
     {
