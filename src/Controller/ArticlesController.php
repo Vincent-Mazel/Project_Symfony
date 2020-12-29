@@ -48,7 +48,7 @@ class ArticlesController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="editArticle")
+     * @Route("/{id}/editArticle", name="editArticle")
      */
     public function editArticle(Request $request, ArticleEntity $articleEntity): Response
     {

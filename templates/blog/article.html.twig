@@ -40,7 +40,6 @@
 							<button type="button" class="btn btn-warning button-marg btn-article btn-modify-article">Modifier article</button>
 						</a>
 						
-
 						<form method="post" action="{{ path('deleteArticle', {'id': article.id}) }}" onsubmit="return confirm('Es-tu sûr de vouloir continuer sur ce chemin et faire disparaître à jamais cet article de la surface de la Terre ?');">
 							<input type="hidden" name="_method" value="DELETE">
 							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
