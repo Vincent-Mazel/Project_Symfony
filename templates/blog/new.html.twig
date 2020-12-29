@@ -7,12 +7,12 @@
 		<title>Création article</title>
 		
         <!-- 
-            Il aurait du y avoir ici l'appel au css correspondant à la page de login et non index, mais pour des raisons
+            Il aurait dû y avoir ici l'appel au css correspondant à la page de login et non index, mais pour des raisons
             qui nous sont obscures, la compilation de login.scss n'a jamais fonctionnée, et nous n'avions pas le temps d'essayer
             de la faire fonctionner.
          -->
 		{% block stylesheets %}
-			{{ encore_entry_link_tags('index') }} 
+			<link rel="stylesheet" href="{{ asset('build/index.css') }}">
 		{% endblock %}
     </head>
 
