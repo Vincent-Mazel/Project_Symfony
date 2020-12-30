@@ -13,10 +13,8 @@ class ArticleEntityType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('url_alias')
             ->add('intro')
             ->add('content')
-            ->add('published')
         ;
     }
 
